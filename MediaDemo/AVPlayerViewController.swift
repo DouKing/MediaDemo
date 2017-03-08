@@ -16,15 +16,23 @@ class AVPlayerViewController: UIViewController {
   @IBOutlet weak var playBtn: UIButton!
   @IBOutlet weak var progressView: UIProgressView!
   
+  var timeObserver: Any?
+  
   var playerItem: AVPlayerItem = {
-    var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
-    path = path?.appending("/capture.mp4")
-    return AVPlayerItem(url: URL(fileURLWithPath: path!))
+//    var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+//    path = path?.appending("/capture.mp4")
+//    return AVPlayerItem(url: URL(fileURLWithPath: path!))
+    
+    let url = URL(string: "https://pic12.secooimg.com/video/siku1205.mp4")
+    return AVPlayerItem(url: url!)
   }()
   
   var player: AVPlayer!
   
   deinit {
+    if let timeObserver = timeObserver {
+      player.removeTimeObserver(timeObserver)
+    }
     removeObserver()
     removeObserver(for: playerItem)
   }
@@ -56,7 +64,7 @@ class AVPlayerViewController: UIViewController {
   }
   
   private func addProgressObserver() {
-    player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: DispatchQueue.main) { [unowned self] (time) in
+    timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: DispatchQueue.main) { [unowned self] (time) in
       let current: Float = Float(time.seconds)
       let total: Float = Float(self.playerItem.duration.seconds)
       print(current, total)

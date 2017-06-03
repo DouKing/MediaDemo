@@ -19,10 +19,6 @@ class AVPlayerViewController: UIViewController {
   var timeObserver: Any?
   
   var playerItem: AVPlayerItem = {
-//    var path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
-//    path = path?.appending("/capture.mp4")
-//    return AVPlayerItem(url: URL(fileURLWithPath: path!))
-    
     let url = URL(string: "https://pic12.secooimg.com/video/siku1205.mp4")
     return AVPlayerItem(url: url!)
   }()
@@ -52,7 +48,22 @@ class AVPlayerViewController: UIViewController {
     playerLayer.frame = playerView.bounds
     playerView.layer.addSublayer(playerLayer)
     
-    player.play()
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    if #available(iOS 10.0, *) {
+      if player.timeControlStatus == .paused {
+        player.play()
+      }
+    } else {
+      // Fallback on earlier versions
+    }
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    player.pause()
   }
   
   private func addObserver() {
@@ -65,10 +76,10 @@ class AVPlayerViewController: UIViewController {
   
   private func addProgressObserver() {
     timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: DispatchQueue.main) { [unowned self] (time) in
-      let current: Float = Float(time.seconds)
-      let total: Float = Float(self.playerItem.duration.seconds)
+      let current = time.seconds
+      let total = self.playerItem.duration.seconds
       print(current, total)
-      self.progressView.progress = current / total
+      self.progressView.progress = Float(current / total)
     }
   }
   
@@ -92,13 +103,33 @@ class AVPlayerViewController: UIViewController {
         }
       }
     } else if kp == "loadedTimeRanges" {
-      
-      
+      let array = playerItem.loadedTimeRanges
+      // 本次缓冲时间范围
+      let timeRange = array.first as! CMTimeRange
+      let start = timeRange.start.seconds
+      let duration = timeRange.duration.seconds
+      print("time range: start \(start), duration \(duration)")
+      let totalBuffer = start + duration
+      print("total buffer: \(totalBuffer)")
     }
   }
   
   @objc private func playbackFinish(note: Notification) {
     print("视频播放完成")
+  }
+
+  var isPlaying = false
+
+  @IBAction func playOrPause(_ sender: UIButton) {
+    if !isPlaying {
+      player.play()
+      sender.setTitle("暂停", for: .normal)
+    } else {
+      player.pause()
+      sender.setTitle("播放", for: .normal)
+    }
+
+    isPlaying = !isPlaying
   }
   
 }

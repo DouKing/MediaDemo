@@ -15,12 +15,18 @@ class AVPlayerViewController: UIViewController {
   @IBOutlet weak var playerView: UIView!
   @IBOutlet weak var playBtn: UIButton!
   @IBOutlet weak var progressView: UIProgressView!
-  
+  @IBOutlet weak var captureImageView: UIImageView!
+  var currentTime: CMTime?
+  let playURL = URL(string: "https://pic12.secooimg.com/video/siku1205.mp4")!
+
   var timeObserver: Any?
-  
-  var playerItem: AVPlayerItem = {
-    let url = URL(string: "https://pic12.secooimg.com/video/siku1205.mp4")
-    return AVPlayerItem(url: url!)
+
+  lazy var playAsset: AVURLAsset = {
+    return AVURLAsset(url: self.playURL)
+  }()
+
+  lazy var playerItem: AVPlayerItem = {
+    return AVPlayerItem(asset: self.playAsset)
   }()
   
   var player: AVPlayer!
@@ -76,6 +82,7 @@ class AVPlayerViewController: UIViewController {
   
   private func addProgressObserver() {
     timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: DispatchQueue.main) { [unowned self] (time) in
+      self.currentTime = time
       let current = time.seconds
       let total = self.playerItem.duration.seconds
       print(current, total)
@@ -131,5 +138,15 @@ class AVPlayerViewController: UIViewController {
 
     isPlaying = !isPlaying
   }
-  
+
+  @IBAction func capture(_ sender: UIButton) {
+    let imageGenerator = AVAssetImageGenerator(asset: playAsset)
+    var actualTime: CMTime = CMTime(seconds: 1, preferredTimescale: 1)
+    guard let current = currentTime else { return }
+    let cgImage = try? imageGenerator.copyCGImage(at: current, actualTime: &actualTime)
+    guard let img = cgImage else { return }
+    CMTimeShow(actualTime)
+    let image = UIImage(cgImage: img)
+    captureImageView.image = image
+  }
 }

@@ -143,20 +143,43 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ao5-Uq-yjf">
                                 <rect key="frame" x="78" y="322" width="281" height="2"/>
                             </progressView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jsH-c7-sGY">
+                                <rect key="frame" x="0.0" y="347" width="375" height="214"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="214" id="6Df-bX-QYQ"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFF-iP-wYB">
+                                <rect key="frame" x="172" y="587" width="31" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="31" id="65v-zK-QCK"/>
+                                    <constraint firstAttribute="height" constant="30" id="xOS-Wb-BRg"/>
+                                </constraints>
+                                <state key="normal" title="截图"/>
+                                <connections>
+                                    <action selector="capture:" destination="Vkg-oj-BQE" eventType="touchUpInside" id="Hr5-gr-X8m"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="14a-dP-S7u" firstAttribute="leading" secondItem="MAE-vc-gxI" secondAttribute="leading" id="2ZS-ju-j6J"/>
                             <constraint firstItem="ao5-Uq-yjf" firstAttribute="trailing" secondItem="MAE-vc-gxI" secondAttribute="trailingMargin" id="7P9-7S-ZEO"/>
+                            <constraint firstItem="hFF-iP-wYB" firstAttribute="top" secondItem="jsH-c7-sGY" secondAttribute="bottom" constant="26" id="9gK-0b-kMP"/>
+                            <constraint firstItem="jsH-c7-sGY" firstAttribute="leading" secondItem="MAE-vc-gxI" secondAttribute="leading" id="Aau-Dy-Jgl"/>
                             <constraint firstItem="kAv-Jl-GCf" firstAttribute="leading" secondItem="MAE-vc-gxI" secondAttribute="leadingMargin" id="HiF-wu-mjr"/>
+                            <constraint firstItem="hFF-iP-wYB" firstAttribute="centerX" secondItem="MAE-vc-gxI" secondAttribute="centerX" id="NvE-Tf-eVx"/>
                             <constraint firstItem="ao5-Uq-yjf" firstAttribute="leading" secondItem="MAE-vc-gxI" secondAttribute="leadingMargin" constant="62" id="VTv-GI-bCG"/>
                             <constraint firstItem="14a-dP-S7u" firstAttribute="top" secondItem="WeT-Ui-GHT" secondAttribute="bottom" constant="8" id="aF7-JC-7GV"/>
                             <constraint firstItem="ao5-Uq-yjf" firstAttribute="centerY" secondItem="kAv-Jl-GCf" secondAttribute="centerY" id="dUr-ku-f54"/>
+                            <constraint firstItem="jsH-c7-sGY" firstAttribute="top" secondItem="kAv-Jl-GCf" secondAttribute="bottom" constant="8" id="dlV-TG-sGO"/>
                             <constraint firstItem="kAv-Jl-GCf" firstAttribute="top" secondItem="14a-dP-S7u" secondAttribute="bottom" constant="21" id="nQ8-V1-rrc"/>
+                            <constraint firstAttribute="trailing" secondItem="jsH-c7-sGY" secondAttribute="trailing" id="uym-Tg-0kZ"/>
                             <constraint firstAttribute="trailing" secondItem="14a-dP-S7u" secondAttribute="trailing" id="xdd-f5-WBg"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="captureImageView" destination="jsH-c7-sGY" id="0Oz-hb-azm"/>
                         <outlet property="playBtn" destination="kAv-Jl-GCf" id="QUG-Te-lDw"/>
                         <outlet property="playerView" destination="14a-dP-S7u" id="lVu-9A-M6E"/>
                         <outlet property="progressView" destination="ao5-Uq-yjf" id="P6q-du-Ld9"/>

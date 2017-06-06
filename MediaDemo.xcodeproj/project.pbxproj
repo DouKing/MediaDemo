@@ -16,6 +16,7 @@
 		009917151E66A54600220C9F /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009917141E66A54600220C9F /* PlayViewController.swift */; };
 		009917171E66A74400220C9F /* SegueIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009917161E66A74400220C9F /* SegueIdentifier.swift */; };
 		009917191E66D92300220C9F /* AVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009917181E66D92300220C9F /* AVPlayerViewController.swift */; };
+		00CFCEE31EE6B2A700689D99 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CFCEE21EE6B2A700689D99 /* TestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		009917141E66A54600220C9F /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		009917161E66A74400220C9F /* SegueIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueIdentifier.swift; sourceTree = "<group>"; };
 		009917181E66D92300220C9F /* AVPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerViewController.swift; sourceTree = "<group>"; };
+		00CFCEE21EE6B2A700689D99 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				009917121E667EC800220C9F /* CaptureViewController.swift */,
 				009917141E66A54600220C9F /* PlayViewController.swift */,
 				009917181E66D92300220C9F /* AVPlayerViewController.swift */,
+				00CFCEE21EE6B2A700689D99 /* TestViewController.swift */,
 				009917161E66A74400220C9F /* SegueIdentifier.swift */,
 				009916E11E666B5700220C9F /* Main.storyboard */,
 				009916E41E666B5700220C9F /* Assets.xcassets */,
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00CFCEE31EE6B2A700689D99 /* TestViewController.swift in Sources */,
 				009917151E66A54600220C9F /* PlayViewController.swift in Sources */,
 				009916E01E666B5700220C9F /* ViewController.swift in Sources */,
 				009917171E66A74400220C9F /* SegueIdentifier.swift in Sources */,
